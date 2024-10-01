@@ -1,0 +1,27 @@
+package edu.pe.cibertec.controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import edu.pe.cibertec.model.Usuario;
+import edu.pe.cibertec.service.UsuarioServiceImp;
+
+@Controller
+public class UsuarioController {
+	@Autowired
+	private UsuarioServiceImp servicio;
+
+	@GetMapping({"/listarUsuarios"})
+	public String listarUsuarios(Model modelo) {
+		modelo.addAttribute("usuarios", servicio.listarUsuario());
+		return "usuario";
+	}
+	@GetMapping({"/nuevoUsuario"})
+	public String newUsuario(Model modelo) {
+		modelo.addAttribute("usuario", new Usuario());
+		return "formUsuario";
+	}
+
+}
